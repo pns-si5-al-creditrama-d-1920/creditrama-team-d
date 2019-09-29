@@ -9,5 +9,5 @@
 
 - Mise en place des repos.
 - Début du développement des modules spécifiés en tant que MVP.
-- Setup de la partie DevOps (Intégration Continue avec Jenkins 6 et Nexus).
+- Setup de la partie DevOps (Intégration Continue avec Jenkins X et Nexus).
 
