@@ -1,3 +1,15 @@
+# Semaine 41
+
+## Fait :
+
+- Mise en place des repos.
+- Discussions par rapport au feedback du premier rendu.
+- Légères modifications pour le périmètre global (eg. importance de la carte).
+
+## A faire : 
+
+- Formaliser le rendu pour mercredi (diagramme de composants et roadmap)
+
 # Semaine 40
 
 ## Fait :
