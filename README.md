@@ -4,6 +4,7 @@ Main repository for Creditrama project
 # Interfaces 
 ## LoginService
 Ce service a pour responsabilité de gérer toute les fonctions de connexion et d'inscription
+
 | LoginService 	| Description                                               	|
 |--------------	|-----------------------------------------------------------	|
 | /register    	| Permet de s'inscrire sur creditrama                       	|
@@ -11,18 +12,21 @@ Ce service a pour responsabilité de gérer toute les fonctions de connexion et 
 
 ## Notification
 Ce service a pour responsabilité de gérer les divers services de notifications
+
 | Notification 	| Description                                                                                        	|
 |--------------	|----------------------------------------------------------------------------------------------------	|
 | /notify      	| Permet de notifier le service correspondant au message d'envoyer une notification (mail, fax, sms) 	|
 
 ## MailService
 Ce service a pour responsabilité de gérer les envoient de mail
+
 | Notification 	| Description                                                                                        	|
 |--------------	|----------------------------------------------------------------------------------------------------	|
 | /sendMail      	| Permet d'envoyer un mail en fonction des paramètres mis en entrés	|
 
 ## BankService
 Ce service a pour responsabilité de géré les opération de base d'un compte en banque
+
 | BankService                              	| Description                                                            	|
 |------------------------------------------	|------------------------------------------------------------------------	|
 | /transfer/{id}                           	| Permet de transféré de l'argent a un bénificiaire                      	|
@@ -34,6 +38,7 @@ Ce service a pour responsabilité de géré les opération de base d'un compte e
 
 ## CardService
 Ce service a pour responsabilité de géré les opération lié au cartes bancaires
+
 | CardService                    	| Description                 	|
 |--------------------------------	|-----------------------------	|
 | /clients/{id}/cards            	| CRUD des cartes clients     	|
