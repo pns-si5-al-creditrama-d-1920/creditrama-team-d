@@ -7,3 +7,6 @@
 [submodule "creditrama-team-d-login-service"]
 	path = creditrama-team-d-login-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-login-service
+[submodule "creditrama-team-d-notification-service"]
+	path = creditrama-team-d-notification-service
+	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-notification-service
