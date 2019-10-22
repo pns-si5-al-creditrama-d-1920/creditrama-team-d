@@ -7,12 +7,16 @@
 - Intégration de kafka et des mails de notification
 - Backend bénéficiaires et transferts
 - Intégration Login et Bank
+- Intégration Login et Notification 
+- Intégration en cours de Notification et de Bank
+- Commencer template email
 
 ## Todo
 
 - Projet d'intégration avec Cucumber
-- Integration des fonctionnalités de bénéficiaires et de transferts dans le front
-- Sign up
+- Intégration des fonctionnalités de bénéficiaires et de transferts dans le front
+- Mettre en place les différents types de notification
+- Lier les templates avec les notifications
 
 ### Flag : Green
 
