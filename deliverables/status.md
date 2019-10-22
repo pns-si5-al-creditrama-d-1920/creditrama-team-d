@@ -1,3 +1,21 @@
+# Semaine 43
+
+## Done
+
+- Fin de la logique de connexion
+- Formalisation des isssues sur le Kanban
+- Intégration de kafka et des mails de notification
+- Backend bénéficiaires et transferts
+- Intégration Login et Bank
+
+## Todo
+
+- Projet d'intégration avec Cucumber
+- Integration des fonctionnalités de bénéficiaires et de transferts dans le front
+- Sign up
+
+### Flag : Green
+
 # Semaine 42
 
 ## Done
