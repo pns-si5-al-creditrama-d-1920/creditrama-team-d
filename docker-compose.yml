@@ -3,9 +3,7 @@ version: "3"
 services:
 
   frontend:
-    build:
-      context: ./creditrama-team-d-frontend
-    image: creditrama-d-frontend:0.1
+    image: creditrama-d-frontend:0.0.1-SNAPSHOT
     container_name: frontend
     ports:
       - 3000:80
@@ -15,12 +13,25 @@ services:
     container_name: bank
     ports:
       - 8080:8080
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+      LOGIN_HOST: login
+      KAFKA_BROKER: kafka
 
   login:
     image: creditrama-d-login-service:0.0.1-SNAPSHOT
     container_name: login
     ports:
       - 9191:9191
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+      KAFKA_BROKER: kafka
 
   postgres:
     image: postgres:12
