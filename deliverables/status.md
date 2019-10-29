@@ -1,3 +1,19 @@
+# Semaine 44
+
+## Done
+
+- Intégration des fonctionnalités de bénéficiaires et de transferts dans le front
+- Projet d'intégration avec Cucumber
+- Dockerisation
+
+## Todo
+
+- Préparation de la démonstration
+- Préparer la carte bancaire
+- Tests services Angular
+
+### Flag : Green
+
 # Semaine 43
 
 ## Done
