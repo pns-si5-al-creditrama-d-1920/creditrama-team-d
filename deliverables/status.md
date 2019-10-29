@@ -11,6 +11,8 @@
 - Préparation de la démonstration
 - Préparer la carte bancaire
 - Tests services Angular
+- Gestion de la contrainte géographique pour Docker
+- Instant Pretty Dump
 
 ### Flag : Green
 
