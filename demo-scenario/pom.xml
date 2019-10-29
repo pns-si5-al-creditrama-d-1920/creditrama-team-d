@@ -23,6 +23,7 @@
         <cucumber.reporting.version>4.10.0</cucumber.reporting.version>
         <feign.version>10.4.0</feign.version>
         <lombok.version>1.18.10</lombok.version>
+        <dockerfile-maven-version>1.4.12</dockerfile-maven-version>
     </properties>
 
     <dependencies>
@@ -119,5 +120,35 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>deployment</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>${dockerfile-maven-version}</version>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <repository>creditrama-d-demo-scenario</repository>
+                            <tag>${project.version}</tag>
+                            <buildArgs>
+                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

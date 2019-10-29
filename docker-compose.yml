@@ -33,6 +33,16 @@ services:
       POSTGRES_DB: creditrama
       KAFKA_BROKER: kafka
 
+  demo:
+    image: creditrama-d-demo-scenario:0.0.1-SNAPSHOT
+    container_name: demo-scenario
+    depends_on:
+      - bank
+      - login
+    environment:
+      BANK_HOST: http://bank:8080
+      LOGIN_HOST: http://login:9191
+
   postgres:
     image: postgres:12
     container_name: postgres
@@ -71,11 +81,21 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     container_name: kafka
 
-  start_dependencies:
+  start_dependencies_kafka_database:
     image: dadarek/wait-for-dependencies
     depends_on:
       - zookeeper
       - kafka
       - postgres
     command: zookeeper:2181 kafka:9092 postgres:5432
-    container_name: start_dependencies
+    container_name: start_dependencies_kafka_database
+
+  start_dependencies_spring:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - bank
+      - login
+    command: bank:8080 login:9191
+    container_name: start_dependencies_spring
+    environment:
+      SLEEP_LENGTH: 10
