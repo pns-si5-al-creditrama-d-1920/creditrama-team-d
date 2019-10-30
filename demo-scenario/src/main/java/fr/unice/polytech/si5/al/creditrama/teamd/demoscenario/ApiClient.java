@@ -27,7 +27,8 @@ public class ApiClient {
                 .client(new ApacheHttpClient())
                 .encoder(new JacksonEncoder(objectMapper))
                 .decoder(new JacksonDecoder(objectMapper))
-                .logger(new Slf4jLogger()).logLevel(Logger.Level.BASIC);
+                .requestInterceptor(new BasicAuthRequestInterceptor("mobile", "pin"))
+                .logger(new Slf4jLogger()).logLevel(Logger.Level.FULL);
     }
 
     public ApiClient(String[] authNames) {

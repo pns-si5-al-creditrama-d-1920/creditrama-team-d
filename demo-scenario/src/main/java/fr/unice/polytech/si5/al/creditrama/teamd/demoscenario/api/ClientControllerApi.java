@@ -27,6 +27,6 @@ public interface ClientControllerApi extends ApiClient.Api {
             "Accept: */*",
             "Content-Type: application/json",
     })
-    Client addUser(@RequestBody Client customer);
+    Client register(@RequestBody Client customer);
 
 }
