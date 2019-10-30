@@ -1,11 +1,15 @@
 package fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.model.bank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @JsonProperty
     private Integer userId;
