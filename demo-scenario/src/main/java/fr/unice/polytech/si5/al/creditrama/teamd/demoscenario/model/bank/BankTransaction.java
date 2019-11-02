@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BankTransaction {
     @JsonProperty
-    private Integer id;
+    private Integer bankTransactionId;
     @JsonProperty
     private Integer sourceId;
     @JsonProperty

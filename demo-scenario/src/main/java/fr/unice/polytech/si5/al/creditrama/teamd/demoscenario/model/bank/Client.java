@@ -15,7 +15,7 @@ public class Client extends User {
     @JsonProperty
     private List<Integer> recipients;
     @JsonProperty
-    private List<BankTransaction> transactions;
+    private List<BankTransaction> bankTransactions;
 
     @Builder
     Client(String username, String password, String email) {
@@ -34,10 +34,10 @@ public class Client extends User {
                   List<Role> roles,
                   List<BankAccount> bankAccounts,
                   List<Integer> recipients,
-                  List<BankTransaction> transactions) {
+                  List<BankTransaction> bankTransactions) {
         super(id, username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, roles);
         this.bankAccounts = bankAccounts;
         this.recipients = recipients;
-        this.transactions = transactions;
+        this.bankTransactions = bankTransactions;
     }
 }

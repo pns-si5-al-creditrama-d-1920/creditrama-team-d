@@ -46,7 +46,7 @@ public class TransferToRecipientStepsDef {
     public void bobReceivesMoneyFromAliceSAccount() {
         List<BankAccount> alicesBankAccounts = world.getBankControllerApi().getMyBankAccounts(alice.getUserId());
         List<BankAccount> bobsBankAccounts = world.getBankControllerApi().getMyBankAccounts(bob.getUserId());
-        List<BankTransaction> bobsTransactions = world.getClientControllerApi().getUserById(bob.getUserId()).getTransactions();
+        List<BankTransaction> bobsTransactions = world.getClientControllerApi().getUserById(bob.getUserId()).getBankTransactions();
 
         assertEquals(150.0, bobsBankAccounts.get(0).getBalance(),0.0);
         assertEquals(50.0, alicesBankAccounts.get(0).getBalance(),0.0);
