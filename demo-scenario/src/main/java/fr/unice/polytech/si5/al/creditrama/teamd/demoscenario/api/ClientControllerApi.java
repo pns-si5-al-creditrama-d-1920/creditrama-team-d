@@ -22,6 +22,12 @@ public interface ClientControllerApi extends ApiClient.Api {
     })
     Client getUserById(@Param(value = "id") int clientId);
 
+    @RequestLine("DELETE /clients/{id}")
+    @Headers({
+            "Accept: */*",
+    })
+    void deleteUserById(@Param(value = "id") int clientId);
+
     @RequestLine("POST /register")
     @Headers({
             "Accept: */*",

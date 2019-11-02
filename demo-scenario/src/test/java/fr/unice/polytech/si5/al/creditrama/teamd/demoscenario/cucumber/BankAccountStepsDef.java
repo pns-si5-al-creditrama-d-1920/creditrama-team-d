@@ -1,20 +1,22 @@
 package fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.cucumber;
 
-import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.BasicAuthRequestInterceptor;
+import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.CucumberConfiguration;
 import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.World;
 import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.model.bank.BankAccount;
 import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.model.bank.Client;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java8.En;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;
 
-public class BankAccountStepsDef {
+public class BankAccountStepsDef implements En {
+    private static Logger log = Logger.getLogger(BankAccountStepsDef.class.getName());
+
     private World world;
     private Client alice;
 
@@ -24,18 +26,14 @@ public class BankAccountStepsDef {
 
     @Given("Alice, a client of CreditRama")
     public void aliceAClientOfCreditRama() {
-        this.alice = world.createClient("alice", "password", "alice@gmail.com");
+        alice = world.createClient("alice", "password", "alice@gmail.com");
+
+        CucumberConfiguration.alice = this.alice;
     }
 
     @When("Alice logs in")
     public void aliceLogsIn() {
-        Map<String, String> details = new HashMap<>();
-        details.put("grant_type", "password");
-        details.put("username", alice.getUsername());
-        details.put("password", "password");
-        String token = world.getLoginControllerApi().getToken(details).getAccessToken();
-        System.out.println("token = " + token);
-        BasicAuthRequestInterceptor.token = token;
+        log.info("Mocking logging");
     }
 
     @Then("Alice can see the balance of her bank account")

@@ -1,7 +1,7 @@
 package fr.unice.polytech.si5.al.creditrama.teamd.demoscenario;
 
+import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.model.bank.Client;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,16 +11,17 @@ import org.slf4j.LoggerFactory;
 public class CucumberConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(CucumberConfiguration.class);
 
-    /**
-     * Need this method so the cucumber will recognize this class as glue and load spring context configuration
-     */
-    @Before
-    public void setUp() {
-        //LOG.info("-------------- Spring Context Initialized For Executing Cucumber Tests --------------");
-    }
+    public static Client alice;
+    public static Client bob;
 
     @After
     public void tearDown() {
-
+        if (alice != null) {
+            World.deleteClient(alice.getUserId());
+        }
+        if (bob != null) {
+            World.deleteClient(bob.getUserId());
+        }
+        BasicAuthRequestInterceptor.token = null;
     }
 }

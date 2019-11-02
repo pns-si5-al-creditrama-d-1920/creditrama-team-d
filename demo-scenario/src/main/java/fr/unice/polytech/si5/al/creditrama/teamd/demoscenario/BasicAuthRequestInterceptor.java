@@ -35,7 +35,6 @@ public class BasicAuthRequestInterceptor implements RequestInterceptor {
     public BasicAuthRequestInterceptor(String username, String password, Charset charset) {
         checkNotNull(username, "username");
         checkNotNull(password, "password");
-        System.out.println("base64Encode((username + \":\" + password).getBytes(charset) = " + base64Encode((username + ":" + password).getBytes(charset)));
         this.headerValue = "Basic " + base64Encode((username + ":" + password).getBytes(charset));
     }
 
