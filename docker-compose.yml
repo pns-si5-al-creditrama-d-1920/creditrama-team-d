@@ -33,6 +33,14 @@ services:
       POSTGRES_DB: creditrama
       KAFKA_BROKER: kafka
 
+  notification:
+    image: creditrama-d-notification-service:0.0.1-SNAPSHOT
+    container_name: notification
+    ports:
+      - 8081:8081
+    environment:
+      KAFKA_BROKER: kafka
+
   demo:
     image: creditrama-d-demo-scenario:0.0.1-SNAPSHOT
     container_name: demo-scenario
@@ -95,7 +103,8 @@ services:
     depends_on:
       - bank
       - login
-    command: bank:8080 login:9191
+      - notification
+    command: bank:8080 login:9191 notification:8081
     container_name: start_dependencies_spring
     environment:
       SLEEP_LENGTH: 10
