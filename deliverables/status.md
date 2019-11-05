@@ -1,3 +1,19 @@
+# Semaine 45
+
+## Done
+
+- Tests Services Angular
+- Des tests Cucumber
+- Instant Pretty Dump
+- Amélioration IHM
+
+## Todo
+
+- Préparer les slides
+- Ajout de fonctionnalités liées aux bénéficiaires (eg. suppression) et aux comptes bancaires (eg. gestion de plusieurs comptes bancaires)
+
+### Flag : Green
+
 # Semaine 44
 
 ## Done
