@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+
+  frontend:
+    image: creditrama-d-frontend:0.0.1-SNAPSHOT
+    container_name: frontend
+    ports:
+      - 3000:80
+
+  login:
+    image: creditrama-d-login-service:0.0.1-SNAPSHOT
+    container_name: login
+    ports:
+      - 9191:9191
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+      KAFKA_BROKER: ${GREENLAND_HOST}
+
+  notification:
+    image: creditrama-d-notification-service:0.0.1-SNAPSHOT
+    container_name: notification
+    ports:
+      - 8081:8081
+    environment:
+      KAFKA_BROKER: ${GREENLAND_HOST}
