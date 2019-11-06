@@ -1,8 +1,6 @@
 package fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.cucumber;
 
-import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.CucumberConfiguration;
 import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.World;
-import fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.model.bank.Client;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,12 +9,12 @@ import io.cucumber.java8.En;
 
 import java.util.List;
 
+import static fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.CucumberConfiguration.alice;
+import static fr.unice.polytech.si5.al.creditrama.teamd.demoscenario.CucumberConfiguration.bob;
 import static junit.framework.TestCase.assertTrue;
 
 public class ManageRecipientsStepDefs implements En {
     private World world;
-    private Client alice;
-    private Client bob;
 
     public ManageRecipientsStepDefs(World world) {
         this.world = world;
@@ -26,9 +24,6 @@ public class ManageRecipientsStepDefs implements En {
     public void aliceAClientOfCreditRama() {
         alice = world.createClient("alice", "password", "alice@gmail.com");
         bob = world.createClient("bob", "password", "bob@gmail.com");
-
-        CucumberConfiguration.alice = this.alice;
-        CucumberConfiguration.bob = this.bob;
     }
 
     @When("Alice adds Bob as a new recipient")
