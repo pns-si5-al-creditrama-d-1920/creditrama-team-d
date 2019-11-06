@@ -16,7 +16,7 @@ public interface BankControllerApi extends ApiClient.Api {
     @Headers({
             "Accept: */*",
     })
-    List<BankAccount> getMyBankAccounts(@Param(value = "id") Integer clientId);
+    List<BankAccount> getBankAccounts(@Param(value = "id") Integer clientId);
 
     @RequestLine("POST /bank/clients/{id}/bank-accounts")
     @Headers({
@@ -37,6 +37,12 @@ public interface BankControllerApi extends ApiClient.Api {
             "Content-Type: application/json",
     })
     Integer addRecipient(@Param(value = "id") Integer clientId, @RequestBody Integer recipientBankAccountId);
+
+    @RequestLine("DELETE /bank/clients/{clientId}/recipients/{recipientId}")
+    @Headers({
+            "Accept: */*",
+    })
+    void deleteRecipient(@Param("clientId") Integer clientId, @Param("recipientId") Integer recipientId);
 
     @RequestLine("POST /bank/clients/{id}/transactions")
     @Headers({

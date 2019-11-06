@@ -38,7 +38,7 @@ public class BankAccountStepsDef implements En {
 
     @Then("Alice can see the balance of her bank account")
     public void aliceCanSeeTheBalanceOfHerBankAccount() {
-        List<BankAccount> aliceAccounts = world.getBankControllerApi().getMyBankAccounts(alice.getUserId());
+        List<BankAccount> aliceAccounts = world.getBankControllerApi().getBankAccounts(alice.getUserId());
         assertEquals(1, aliceAccounts.size());
         assertEquals(100.0, aliceAccounts.get(0).getBalance(), 0.0);
     }

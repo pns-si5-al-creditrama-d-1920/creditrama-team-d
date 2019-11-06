@@ -23,14 +23,14 @@ public class TransferToRecipientStepsDef {
     @Given("Alice with a positive balance on her bank account")
     public void aliceWithAPositiveBalanceOnHerBankAccount() {
         alice = world.createClient("alice", "password", "alice@gmail.com");
-        assertEquals(100.0, world.getBankControllerApi().getMyBankAccounts(alice.getUserId()).get(0).getBalance(), 0.0);
+        assertEquals(100.0, world.getBankControllerApi().getBankAccounts(alice.getUserId()).get(0).getBalance(), 0.0);
         bob = world.createClient("bob", "password2", "bob@gmail.com");
     }
 
     @When("Alice makes a transfer to her recipient Bob")
     public void aliceMakesATransferToHerRecipientBob() {
-        List<BankAccount> alicesBankAccounts = world.getBankControllerApi().getMyBankAccounts(alice.getUserId());
-        List<BankAccount> bobsBankAccounts = world.getBankControllerApi().getMyBankAccounts(bob.getUserId());
+        List<BankAccount> alicesBankAccounts = world.getBankControllerApi().getBankAccounts(alice.getUserId());
+        List<BankAccount> bobsBankAccounts = world.getBankControllerApi().getBankAccounts(bob.getUserId());
 
         world.getBankControllerApi().addRecipient(alice.getUserId(), bobsBankAccounts.get(0).getBankAccountId());
 
@@ -44,8 +44,8 @@ public class TransferToRecipientStepsDef {
 
     @Then("Bob receives money from Alice's account")
     public void bobReceivesMoneyFromAliceSAccount() {
-        List<BankAccount> alicesBankAccounts = world.getBankControllerApi().getMyBankAccounts(alice.getUserId());
-        List<BankAccount> bobsBankAccounts = world.getBankControllerApi().getMyBankAccounts(bob.getUserId());
+        List<BankAccount> alicesBankAccounts = world.getBankControllerApi().getBankAccounts(alice.getUserId());
+        List<BankAccount> bobsBankAccounts = world.getBankControllerApi().getBankAccounts(bob.getUserId());
         List<BankTransaction> bobsTransactions = world.getClientControllerApi().getUserById(bob.getUserId()).getBankTransactions();
 
         assertEquals(150.0, bobsBankAccounts.get(0).getBalance(),0.0);
