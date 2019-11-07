@@ -14,7 +14,7 @@ services:
     ports:
       - 9191:9191
     environment:
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: ${GREENLAND_HOST}
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: creditrama
