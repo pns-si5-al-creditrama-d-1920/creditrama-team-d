@@ -62,7 +62,7 @@ services:
       POSTGRES_DB: creditrama
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:5.3.1
     ports:
       - 2181:2181
     environment:
@@ -71,7 +71,7 @@ services:
     container_name: zookeeper
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:5.3.1
     depends_on:
       - zookeeper
     environment:
@@ -90,7 +90,7 @@ services:
     container_name: kafka
 
   start_dependencies_kafka_database:
-    image: dadarek/wait-for-dependencies
+    image: dadarek/wait-for-dependencies:0.2
     depends_on:
       - zookeeper
       - kafka
@@ -99,7 +99,7 @@ services:
     container_name: start_dependencies_kafka_database
 
   start_dependencies_spring:
-    image: dadarek/wait-for-dependencies
+    image: dadarek/wait-for-dependencies:0.2
     depends_on:
       - bank
       - login
