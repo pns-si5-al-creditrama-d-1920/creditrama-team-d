@@ -1,0 +1,110 @@
+version: "3"
+
+services:
+
+  frontend:
+    image: creditrama-d-frontend:0.0.1-SNAPSHOT
+    container_name: frontend
+    ports:
+      - 3000:80
+
+  bank:
+    image: creditrama-d-bank-service:0.0.1-SNAPSHOT
+    container_name: bank
+    ports:
+      - 8080:8080
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+      LOGIN_HOST: login
+      KAFKA_BROKER: kafka
+
+  login:
+    image: creditrama-d-login-service:0.0.1-SNAPSHOT
+    container_name: login
+    ports:
+      - 9191:9191
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+      KAFKA_BROKER: kafka
+
+  notification:
+    image: creditrama-d-notification-service:0.0.1-SNAPSHOT
+    container_name: notification
+    ports:
+      - 8081:8081
+    environment:
+      KAFKA_BROKER: kafka
+
+  demo:
+    image: creditrama-d-demo-scenario:0.0.1-SNAPSHOT
+    container_name: demo-scenario
+    depends_on:
+      - bank
+      - login
+    environment:
+      BANK_HOST: http://bank:8080
+      LOGIN_HOST: http://login:9191
+
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.3.1
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    container_name: zookeeper
+
+  kafka:
+    image: confluentinc/cp-kafka:5.3.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_CREATE_TOPICS: 'CreditRama.SendNotif:1:1'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9092,OUTSIDE://localhost:29092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - 9092:9092
+      - 29092:29092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    container_name: kafka
+
+  start_dependencies_kafka_database:
+    image: dadarek/wait-for-dependencies:0.2
+    depends_on:
+      - zookeeper
+      - kafka
+      - postgres
+    command: zookeeper:2181 kafka:9092 postgres:5432
+    container_name: start_dependencies_kafka_database
+
+  start_dependencies_spring:
+    image: dadarek/wait-for-dependencies:0.2
+    depends_on:
+      - bank
+      - login
+      - notification
+    command: bank:8080 login:9191 notification:8081
+    container_name: start_dependencies_spring
+    environment:
+      SLEEP_LENGTH: 10
