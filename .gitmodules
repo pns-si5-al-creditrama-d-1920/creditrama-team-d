@@ -10,3 +10,6 @@
 [submodule "creditrama-team-d-notification-service"]
 	path = creditrama-team-d-notification-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-notification-service
+[submodule "creditrama-team-d-bankaccount-service"]
+	path = creditrama-team-d-bankaccount-service
+	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-bankaccount-service
