@@ -16,9 +16,9 @@ public class World {
 
     public World() {
         ApiClient apiClient = new ApiClient();
-        bankControllerApi = apiClient.setBasePath(ServiceHost.BANK_HOST.getHost()).buildClient(BankControllerApi.class);
-        clientControllerApi = apiClient.setBasePath(ServiceHost.BANK_HOST.getHost()).buildClient(ClientControllerApi.class);
-        loginControllerApi = apiClient.setBasePath(ServiceHost.LOGIN_HOST.getHost()).buildClient(LoginControllerApi.class);
+        bankControllerApi = apiClient.setBasePath(ServiceHost.CLIENT_HOST.getHost()).buildClient(BankControllerApi.class);
+        clientControllerApi = apiClient.setBasePath(ServiceHost.CLIENT_HOST.getHost()).buildClient(ClientControllerApi.class);
+        loginControllerApi = apiClient.setBasePath(ServiceHost.AUTHORIZATION_HOST.getHost()).buildClient(LoginControllerApi.class);
     }
 
     public BankControllerApi getBankControllerApi() {
@@ -54,8 +54,8 @@ public class World {
     }
 
     enum ServiceHost {
-        BANK_HOST("http://localhost:8080", System.getenv("BANK_HOST")),
-        LOGIN_HOST("http://localhost:9191", System.getenv("LOGIN_HOST"));
+        CLIENT_HOST("http://localhost:8080", System.getenv("CLIENT_HOST")),
+        AUTHORIZATION_HOST("http://localhost:9191", System.getenv("AUTHORIZATION_HOST"));
 
         private String defaultHost;
         private String environmentHost;

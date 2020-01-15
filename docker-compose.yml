@@ -3,38 +3,38 @@ version: "3"
 services:
 
   frontend:
-    image: creditrama-d-frontend:0.0.1-SNAPSHOT
+    image: creditrama-d-frontend:0.0.2-SNAPSHOT
     container_name: frontend
     ports:
       - 3000:80
 
-  bank:
-    image: creditrama-d-bank-service:0.0.1-SNAPSHOT
-    container_name: bank
+  client:
+    image: creditrama-d-client-service:0.0.2-SNAPSHOT
+    container_name: client
     ports:
       - 8080:8080
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: creditrama
-      LOGIN_HOST: login
+      POSTGRES_DB: creditrama_client
+      AUTHORIZATION_HOST: authorization
       KAFKA_BROKER: kafka
 
-  login:
-    image: creditrama-d-login-service:0.0.1-SNAPSHOT
-    container_name: login
+  authorization:
+    image: creditrama-d-authorization-service:0.0.2-SNAPSHOT
+    container_name: authorization
     ports:
       - 9191:9191
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: creditrama
+      POSTGRES_DB: creditrama_client
       KAFKA_BROKER: kafka
 
   notification:
-    image: creditrama-d-notification-service:0.0.1-SNAPSHOT
+    image: creditrama-d-notification-service:0.0.2-SNAPSHOT
     container_name: notification
     ports:
       - 8081:8081
@@ -42,14 +42,14 @@ services:
       KAFKA_BROKER: kafka
 
   demo:
-    image: creditrama-d-demo-scenario:0.0.1-SNAPSHOT
+    image: creditrama-d-demo-scenario:0.0.2-SNAPSHOT
     container_name: demo-scenario
     depends_on:
-      - bank
-      - login
+      - client
+      - authorization
     environment:
-      BANK_HOST: http://bank:8080
-      LOGIN_HOST: http://login:9191
+      CLIENT_HOST: http://client:8080
+      AUTHORIZATION_HOST: http://authorization:9191
 
   postgres:
     image: postgres:12
@@ -59,7 +59,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: creditrama
+      POSTGRES_MULTIPLE_DATABASES: creditrama_client,creditrama_accounts
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.1
@@ -101,10 +101,10 @@ services:
   start_dependencies_spring:
     image: dadarek/wait-for-dependencies:0.2
     depends_on:
-      - bank
-      - login
+      - client
+      - authorization
       - notification
-    command: bank:8080 login:9191 notification:8081
+    command: client:8080 authorization:9191 notification:8081
     container_name: start_dependencies_spring
     environment:
       SLEEP_LENGTH: 10
