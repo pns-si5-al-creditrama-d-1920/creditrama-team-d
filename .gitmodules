@@ -1,9 +1,9 @@
 [submodule "creditrama-team-d-frontend"]
 	path = creditrama-team-d-frontend
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-frontend
-[submodule "creditrama-team-d-bank-service"]
-	path = creditrama-team-d-bank-service
-	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-bank-service
+[submodule "creditrama-team-d-client-service"]
+	path = creditrama-team-d-client-service
+	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-client-service
 [submodule "creditrama-team-d-login-service"]
 	path = creditrama-team-d-login-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-login-service
