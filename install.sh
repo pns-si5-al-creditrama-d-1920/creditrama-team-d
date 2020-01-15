@@ -6,8 +6,8 @@ build() {
   cd ..
 }
 
-build creditrama-team-d-bank-service
-build creditrama-team-d-login-service
+build creditrama-team-d-client-service
+build creditrama-team-d-authorization-service
 build creditrama-team-d-notification-service
 
 cd creditrama-team-d-frontend || true
