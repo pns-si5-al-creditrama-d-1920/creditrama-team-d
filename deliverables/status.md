@@ -1,3 +1,36 @@
+# Semaine 4
+
+## Done
+- Recherches pour l'erreur en écriture dans la base MongoDB (piste : throw notre Exception)
+- CI
+- Tests unitaires sur les nouveaux services
+- Avancement dans l'implémentation du pattern SAGA
+
+## Todo 
+- Implémentation de l'erreur en écriture
+- CD
+- Terminer le SAGA
+- Ajout du token de validation
+- Corriger Dump après refactor
+
+### Flag : Yellow
+
+# Semaine 3
+
+## Done
+
+- Découpage du BankService en 3 service
+- Adaptation de l'IHM
+- Changement (en cours) de la migration vers Tekton pour le CI/CD
+
+## Todo 
+- Résolution de bug lié au refactor .
+- Pipeline CI/CD complete
+- Ameilioration du pattern SAGA dans les Transactions
+- Ajout du token de validation
+
+### Flag : Yellow
+
 # Semaine 45
 
 ## Done
@@ -97,20 +130,4 @@
 - Mise en place des repos.
 - Début du développement des modules spécifiés en tant que MVP.
 - Setup de la partie DevOps (Intégration Continue avec Jenkins X et Nexus).
-
-### Flag : Yellow
-
-# Semaine 3
-
-## Done
-
-- Découpage du BankService en 3 service
-- Adaptation de l'IHM
-- Changement (en cours) de la migration vers Tekton pour le CI/CD
-
-## Todo 
-- Résolution de bug lié au refactor .
-- Pipeline CI/CD complete
-- Ameilioration du pattern SAGA dans les Transactions
-- Ajout du token de validation
 
