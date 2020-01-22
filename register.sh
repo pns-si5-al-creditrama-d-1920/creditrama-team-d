@@ -14,6 +14,8 @@ curl -X POST \
   -H "Content-Type: application/json" \
   -d "{
   \"username\": \"$username\",
+  \"firstName\": \"$username\",
+  \"lastName\": \"$username\",
   \"password\": \"$password\",
   \"email\": \"$email\"
 }"
