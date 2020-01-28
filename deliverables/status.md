@@ -1,4 +1,21 @@
-# Semaine 4
+# Semaine 05
+
+## Done
+- CI/CD terminée
+- Début de tests Cypress : page de login
+- Erreur d'écriture en BD avec un switch on/off dans le dump
+- Début de la vérification de la transaction par email
+- Pattern SAGA fonctionnel simple, pas de gestion d'erreurs
+
+## Todo
+- Prendre en compte l'erreur d'écriture en BD pour le pattern SAGA
+- Amélioration du fail de l'écriture en BD
+- Finir la vérification de la transaction
+- Début du refactor des tests Cucumber
+
+### Flag : Green
+
+# Semaine 04
 
 ## Done
 - Recherches pour l'erreur en écriture dans la base MongoDB (piste : throw notre Exception)
@@ -15,7 +32,7 @@
 
 ### Flag : Yellow
 
-# Semaine 3
+# Semaine 03
 
 ## Done
 
