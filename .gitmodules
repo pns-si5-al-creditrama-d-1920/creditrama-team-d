@@ -10,10 +10,12 @@
 [submodule "creditrama-team-d-bankaccount-service"]
 	path = creditrama-team-d-bankaccount-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-bankaccount-service
-
 [submodule "creditrama-team-d-client-service"]
 	path = creditrama-team-d-client-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-client-service.git
 [submodule "creditrama-team-d-authorization-service"]
 	path = creditrama-team-d-authorization-service
 	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-authorization-service.git
+[submodule "creditrama-team-d-card-service"]
+	path = creditrama-team-d-card-service
+	url = https://github.com/pns-si5-al-creditrama-d-1920/creditrama-team-d-card-service
