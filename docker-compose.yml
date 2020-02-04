@@ -90,7 +90,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
-      POSTGRES_MULTIPLE_DATABASES: creditrama_client,creditrama_accounts
+      POSTGRES_MULTIPLE_DATABASES: creditrama_client,creditrama_accounts,creditrama_cards
 
   mongo:
     image: mongo:3.6.15
