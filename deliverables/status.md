@@ -1,3 +1,19 @@
+# Semaine 06
+
+## Done
+- Gestion d'erreur et code avec le pattern SAGA 
+- Suite tests Cypress
+- Début CardService
+- Verification de la transaction par mail
+
+## Todo
+- Finir intégration SAGA
+- Utilisation de Postman pour les tests d'intégration
+- Finir les features du CardService
+- Historique des transactions
+
+### Flag : Green
+
 # Semaine 05
 
 ## Done
