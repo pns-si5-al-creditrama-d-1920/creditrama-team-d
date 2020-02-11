@@ -1,3 +1,21 @@
+# Semaine 07
+
+## Done
+- Walking Skeleton CardService
+- Intégration et mise en prod de CardService
+- Fin intégration SAGA
+- Mise en prod SAGA
+
+## Todo
+- Finir tests Cypress
+- Amelioration scheduler
+- Historique transactions
+- Amelioration SAGA
+- Amelioration code de validation
+- Tests d'intégration
+
+### Flag : Yellow
+
 # Semaine 06
 
 ## Done
