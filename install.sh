@@ -10,12 +10,26 @@ build() {
   cd ..
 }
 
-build creditrama-team-d-authorization-service
-build creditrama-team-d-bankaccount-service
-build creditrama-team-d-client-service
-build creditrama-team-d-notification-service
-build creditrama-team-d-transaction-service
-
-cd creditrama-team-d-frontend || true
-docker build -t creditrama-d-frontend:0.0.2-SNAPSHOT .
+cd creditrama-team-d-authorization-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-authorization-service:demo"
 cd ..
+cd creditrama-team-d-bankaccount-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-bankaccount-service:demo"
+cd ..
+cd creditrama-team-d-client-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-client-service:demo"
+cd ..
+cd creditrama-team-d-notification-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-notification-service:demo"
+cd ..
+cd creditrama-team-d-transaction-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-transaction-service:demo"
+cd ..
+
+cd creditrama-team-d-card-service
+mvn jib:dockerBuild -Dimage="creditrama-team-d-card-service:demo"
+cd ..
+
+#cd creditrama-team-d-frontend || true
+#docker build -t creditrama-d-frontend:demo .
+#cd ..

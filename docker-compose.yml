@@ -2,15 +2,17 @@ version: "3"
 
 services:
 
-  frontend:
-    image: creditrama-d-frontend:0.0.2-SNAPSHOT
-    container_name: frontend
-    ports:
-      - 3000:80
+  #frontend:
+  #image: creditrama-team-d-frontend:demo
+  #container_name: frontend
+  #ports:
+  #  - 3000:80
 
   client:
-    image: creditrama-d-client-service:0.0.2-SNAPSHOT
+    image: creditrama-team-d-client-service:demo
     container_name: client
+    depends_on:
+      - postgres
     ports:
       - 8080:8080
     environment:
@@ -18,13 +20,16 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: creditrama_client
-      AUTHORIZATION_HOST: authorization
-      BANKACCOUNT_HOST: bankaccount
+      AUTHORIZATION_HOST: http://authorization:9191
+      BANKACCOUNT_HOST: http://bankaccount:8083
+      CARD_HOST: http://card:8085
       KAFKA_BROKER: kafka
 
   bankaccount:
-    image: creditrama-d-bankaccount-service:0.0.2-SNAPSHOT
+    image: creditrama-team-d-bankaccount-service:demo
     container_name: bankaccount
+    depends_on:
+      - postgres
     ports:
       - 8083:8083
     environment:
@@ -32,27 +37,47 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: creditrama_accounts
-      AUTHORIZATION_HOST: authorization
+      AUTHORIZATION_HOST: http://authorization:9191
+      KAFKA_BROKER: kafka
+
+  card:
+    image: creditrama-team-d-card-service:demo
+    container_name: card
+    depends_on:
+      - postgres
+    ports:
+      - 8085:8085
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: creditrama_cards
+      AUTHORIZATION_HOST: http://authorization:9191
       KAFKA_BROKER: kafka
 
   transaction:
-    image: creditrama-d-transaction-service:0.0.2-SNAPSHOT
+    image: creditrama-team-d-transaction-service:demo
     container_name: transaction
+    depends_on:
+      - mongo
     ports:
       - 8084:8084
     environment:
       MONGO_HOST: mongo
       MONGO_PORT: 27017
-      #      MONGO_USER: postgres
-      #      MONGO_PASSWORD: docker
+      MONGO_USER: team-d
+      MONGO_PWD: jboss-team-d
       MONGO_DB: transactions_db
-      AUTHORIZATION_HOST: authorization
-      BANKACCOUNT_HOST: bankaccount
+      AUTHORIZATION_HOST: http://authorization:9191
+      BANKACCOUNT_HOST: http://bankaccount:8083
       KAFKA_BROKER: kafka
+      AXON_SERVER: axon-server
 
   authorization:
-    image: creditrama-d-authorization-service:0.0.2-SNAPSHOT
+    image: creditrama-team-d-authorization-service:demo
     container_name: authorization
+    depends_on:
+      - postgres
     ports:
       - 9191:9191
     environment:
@@ -63,22 +88,22 @@ services:
       KAFKA_BROKER: kafka
 
   notification:
-    image: creditrama-d-notification-service:0.0.2-SNAPSHOT
+    image: creditrama-team-d-notification-service:demo
     container_name: notification
     ports:
       - 8081:8081
     environment:
       KAFKA_BROKER: kafka
 
-  demo:
-    image: creditrama-d-demo-scenario:0.0.2-SNAPSHOT
-    container_name: demo-scenario
-    depends_on:
-      - client
-      - authorization
-    environment:
-      CLIENT_HOST: http://client:8080
-      AUTHORIZATION_HOST: http://authorization:9191
+  #demo:
+  #  image: creditrama-team-d-demo-scenario:demo
+  #  container_name: demo-scenario
+  #  depends_on:
+  #    - client
+  #    - authorization
+  #  environment:
+  #    CLIENT_HOST: http://client:8080
+  #    AUTHORIZATION_HOST: http://authorization:9191
 
   postgres:
     image: postgres:12-alpine
@@ -97,6 +122,12 @@ services:
     ports:
       - 27017:27017
     container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: team-d
+      MONGO_INITDB_ROOT_PASSWORD: jboss-team-d
+      MONGO_INITDB_DATABASE: transactions_db
+    volumes:
+      - ./data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
 
   zookeeper:
     image: confluentinc/cp-zookeeper:5.3.1
@@ -126,6 +157,17 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     container_name: kafka
 
+  axon-server:
+    container_name: axon-server
+    image: axoniq/axonserver
+    hostname: axon-server
+    environment:
+      - AXONSERVER_EVENTSTORE=/eventstore
+      - AXONSERVER_CONTROLDB=/controldb
+    ports:
+      - '8024:8024'
+      - '8124:8124'
+
   start_dependencies_kafka_database:
     image: dadarek/wait-for-dependencies:0.2
     depends_on:
@@ -133,7 +175,7 @@ services:
       - kafka
       - postgres
       - mongo
-    command: zookeeper:2181 kafka:9092 postgres:5432 mongo:27017
+    command: zookeeper:2181 kafka:9092 postgres:5432 mongo:27017 axon-server:8124
     container_name: start_dependencies_kafka_database
 
   start_dependencies_spring:
@@ -144,7 +186,9 @@ services:
       - authorization
       - notification
       - transaction
-    command: bankaccount:8083 client:8080 authorization:9191 notification:8081 transaction:8084
+      - card
+    command: bankaccount:8083 client:8080 authorization:9191 notification:8081 transaction:8084 card:8085
     container_name: start_dependencies_spring
     environment:
       SLEEP_LENGTH: 10
+
