@@ -94,6 +94,8 @@ services:
       - 8081:8081
     environment:
       KAFKA_BROKER: kafka
+      AUTHORIZATION_HOST: http://authorization:9191
+      CLIENT_HOST: http://client:8080
 
   #demo:
   #  image: creditrama-team-d-demo-scenario:demo
