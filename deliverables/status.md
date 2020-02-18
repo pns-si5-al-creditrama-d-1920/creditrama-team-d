@@ -1,3 +1,19 @@
+# Semaine 08
+
+## Done
+- Tests d'intégration
+- Amélioration code de validation
+- Amélioration SAGA
+- Historique transactions
+- Amélioration IHM
+- Amélioration scheduler
+
+## Todo
+- Préparer la soutenance
+- Finaliser le rapport
+
+### Flag : Green
+
 # Semaine 07
 
 ## Done
