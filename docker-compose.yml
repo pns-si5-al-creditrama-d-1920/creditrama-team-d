@@ -177,6 +177,7 @@ services:
       - kafka
       - postgres
       - mongo
+      - axon-server
     command: zookeeper:2181 kafka:9092 postgres:5432 mongo:27017 axon-server:8124
     container_name: start_dependencies_kafka_database
 
